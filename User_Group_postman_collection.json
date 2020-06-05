@@ -1,0 +1,1940 @@
+{
+	"info": {
+		"_postman_id": "480d351e-237e-4508-9954-aa33ba861903",
+		"name": "User Group Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "iControl",
+			"item": [
+				{
+					"name": "List",
+					"item": [
+						{
+							"name": "List - LTM Virtual Servers",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{password}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{user}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://{{big-ip}}/mgmt/tm/ltm/virtual/",
+									"protocol": "https",
+									"host": [
+										"{{big-ip}}"
+									],
+									"path": [
+										"mgmt",
+										"tm",
+										"ltm",
+										"virtual",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "List - LTM Pools",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{password}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{user}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://{{big-ip}}/mgmt/tm/ltm/pool/",
+									"protocol": "https",
+									"host": [
+										"{{big-ip}}"
+									],
+									"path": [
+										"mgmt",
+										"tm",
+										"ltm",
+										"pool",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "List - LTM Nodes",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{password}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{user}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://{{big-ip}}/mgmt/tm/ltm/node/",
+									"protocol": "https",
+									"host": [
+										"{{big-ip}}"
+									],
+									"path": [
+										"mgmt",
+										"tm",
+										"ltm",
+										"node",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Create",
+					"item": [
+						{
+							"name": "Create - LTM Node",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "01f93618-0cb1-4adb-8139-62886f582510",
+										"exec": [
+											"if (responseCode.code === 200) {\r",
+											"    pm.collectionVariables.set('PRIOR_RESPONSE', 'OK');\r",
+											"    pm.test(\"Created Node\", function () {\r",
+											"        pm.response.to.have.status(200);\r",
+											"    });\r",
+											"} else\r",
+											"    pm.test(\"Node Exists\", function () {\r",
+											"        pm.response.to.have.status(409);\r",
+											"    });"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{password}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{user}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \r\n    \"name\": \"app.acme.com_node1\",\r\n    \"address\": \"10.1.20.19\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://{{big-ip}}/mgmt/tm/ltm/node/",
+									"protocol": "https",
+									"host": [
+										"{{big-ip}}"
+									],
+									"path": [
+										"mgmt",
+										"tm",
+										"ltm",
+										"node",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create - LTM Monitor",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "61b7c9ee-9127-4f1e-842a-f3a807c5a956",
+										"exec": [
+											"if (responseCode.code === 200) {\r",
+											"    pm.collectionVariables.set('PRIOR_RESPONSE', 'OK');\r",
+											"    pm.test(\"Created Monitor\", function () {\r",
+											"        pm.response.to.have.status(200);\r",
+											"    });\r",
+											"} else\r",
+											"    pm.test(\"Monitor Exists\", function () {\r",
+											"        pm.response.to.have.status(409);\r",
+											"    });"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{password}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{user}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\": \"app.acme.com_monitor\",\n\t\"partition\": \"Common\",\n\t\"defaultsFrom\": \"/Common/http\",\n\t\"destination\": \"*.*\",\n\t\"interval\": \"10\",\n\t\"timeout\": \"31\",\n\t\"send\": \"GET /index.php\\\\r\\\\n\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://{{big-ip}}/mgmt/tm/ltm/monitor/http/",
+									"protocol": "https",
+									"host": [
+										"{{big-ip}}"
+									],
+									"path": [
+										"mgmt",
+										"tm",
+										"ltm",
+										"monitor",
+										"http",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create - LTM Pool",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "3cd897ff-ba54-4120-ac9a-cf3700b7bca8",
+										"exec": [
+											"if (responseCode.code === 200) {\r",
+											"    pm.collectionVariables.set('PRIOR_RESPONSE', 'OK');\r",
+											"    pm.test(\"Created Pool\", function () {\r",
+											"        pm.response.to.have.status(200);\r",
+											"    });\r",
+											"} else\r",
+											"    pm.test(\"Pool Exists\", function () {\r",
+											"        pm.response.to.have.status(409);\r",
+											"    });"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{password}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{user}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"app.acme.com_pool\",\n    \"monitor\": \"app.acme.com_monitor\",\n    \"members\": \"app.acme.com_node1:80\" \n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://{{big-ip}}/mgmt/tm/ltm/pool/",
+									"protocol": "https",
+									"host": [
+										"{{big-ip}}"
+									],
+									"path": [
+										"mgmt",
+										"tm",
+										"ltm",
+										"pool",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create - LTM HTTP Profile (HTTPS)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "dad86cc6-cb4a-402a-96f5-f996f19b687d",
+										"exec": [
+											"if (responseCode.code === 200) {\r",
+											"    pm.collectionVariables.set('PRIOR_RESPONSE', 'OK');\r",
+											"    pm.test(\"Created HTTP Profile (HTTPS)\", function () {\r",
+											"        pm.response.to.have.status(200);\r",
+											"    });\r",
+											"} else\r",
+											"    pm.test(\"HTTPS Profile Exists\", function () {\r",
+											"        pm.response.to.have.status(409);\r",
+											"    });"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{password}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{user}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\": \"acme_https\",\n\t\"defaultsFrom\": \"/Common/http\",\n\t\"insertXforwardedFor\":\"enabled\",\n\t\"hsts\": { \"mode\": \"enabled\"}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://{{big-ip}}/mgmt/tm/ltm/profile/http/",
+									"protocol": "https",
+									"host": [
+										"{{big-ip}}"
+									],
+									"path": [
+										"mgmt",
+										"tm",
+										"ltm",
+										"profile",
+										"http",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create - LTM HTTP Profile (HTTP)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "6ff1d0dc-9d59-4866-82f9-660fe2936764",
+										"exec": [
+											"if (responseCode.code === 200) {\r",
+											"    pm.collectionVariables.set('PRIOR_RESPONSE', 'OK');\r",
+											"    pm.test(\"Created HTTP Profile (HTTP)\", function () {\r",
+											"        pm.response.to.have.status(200);\r",
+											"    });\r",
+											"} else\r",
+											"    pm.test(\"HTTP Profile Exists\", function () {\r",
+											"        pm.response.to.have.status(409);\r",
+											"    });"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{password}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{user}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\": \"acme_http\",\n\t\"defaultsFrom\": \"/Common/http\",\n\t\"insertXforwardedFor\":\"enabled\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://{{big-ip}}/mgmt/tm/ltm/profile/http/",
+									"protocol": "https",
+									"host": [
+										"{{big-ip}}"
+									],
+									"path": [
+										"mgmt",
+										"tm",
+										"ltm",
+										"profile",
+										"http",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create - LTM HTTP Persistence Cookie",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "7ec33cb6-0452-46cc-a037-9250567d6764",
+										"exec": [
+											"if (responseCode.code === 200) {\r",
+											"    pm.collectionVariables.set('PRIOR_RESPONSE', 'OK');\r",
+											"    pm.test(\"Created Cookie\", function () {\r",
+											"        pm.response.to.have.status(200);\r",
+											"    });\r",
+											"} else\r",
+											"    pm.test(\"Cookie Exists\", function () {\r",
+											"        pm.response.to.have.status(409);\r",
+											"    });"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{password}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{user}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\":\"acme_cookie\",\n\t\"defaultsFrom\":\"/Common/cookie\",\n\t\"cookieName\":\"ACMECookie\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://{{big-ip}}/mgmt/tm/ltm/persistence/cookie/",
+									"protocol": "https",
+									"host": [
+										"{{big-ip}}"
+									],
+									"path": [
+										"mgmt",
+										"tm",
+										"ltm",
+										"persistence",
+										"cookie",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create - LTM HTTP Client SSL",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "00e67378-8831-4dd0-bc45-44b53a057510",
+										"exec": [
+											"if (responseCode.code === 200) {\r",
+											"    pm.collectionVariables.set('PRIOR_RESPONSE', 'OK');\r",
+											"    pm.test(\"Created Client SSL Profile\", function () {\r",
+											"        pm.response.to.have.status(200);\r",
+											"    });\r",
+											"} else\r",
+											"    pm.test(\"Client SSL Profile Exists\", function () {\r",
+											"        pm.response.to.have.status(409);\r",
+											"    });"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{password}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{user}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\":\"app.acme.com_client-ssl\",\n\t\"key\": \"/Common/acme.com-wildcard\",\n\t\"cert\": \"/Common/acme.com-wildcard\",\n\t\"ciphers\": \"DEFAULT\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://{{big-ip}}/mgmt/tm/ltm/profile/client-ssl/",
+									"protocol": "https",
+									"host": [
+										"{{big-ip}}"
+									],
+									"path": [
+										"mgmt",
+										"tm",
+										"ltm",
+										"profile",
+										"client-ssl",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create - LTM Virtual Server (443)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "54d86322-e656-49ba-9098-99eec3f6b470",
+										"exec": [
+											"if (responseCode.code === 200) {\r",
+											"    pm.collectionVariables.set('PRIOR_RESPONSE', 'OK');\r",
+											"    pm.test(\"Created Virtual Server 443\", function () {\r",
+											"        pm.response.to.have.status(200);\r",
+											"    });\r",
+											"} else\r",
+											"    pm.test(\"Virtual Server 443 Exists\", function () {\r",
+											"        pm.response.to.have.status(409);\r",
+											"    });"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{password}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{user}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \r\n    \"name\": \"app.acme.com_vs\",\r\n    \"destination\": \"10.1.10.187:443\",\r\n    \"mask\": \"255.255.255.255\",\r\n    \"pool\": \"app.acme.com_pool\",\r\n    \"persist\": [ {\"name\": \"acme_cookie\"} ],\r\n    \"profilesReference\": {\"items\": [ {\"context\": \"all\", \"name\": \"acme_https\"}, {\"context\": \"all\", \"name\": \"tcp\"}, {\"context\": \"clientside\", \"name\": \"app.acme.com_client-ssl\"}] },\r\n    \"sourceAddressTranslation\": {\"type\": \"automap\"}\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://{{big-ip}}/mgmt/tm/ltm/virtual/",
+									"protocol": "https",
+									"host": [
+										"{{big-ip}}"
+									],
+									"path": [
+										"mgmt",
+										"tm",
+										"ltm",
+										"virtual",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create - LTM Virtual Server (80)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "996cb730-fb19-425a-9b23-812666e9596f",
+										"exec": [
+											"if (responseCode.code === 200) {\r",
+											"    pm.collectionVariables.set('PRIOR_RESPONSE', 'OK');\r",
+											"    pm.test(\"Created Virtual Server 80\", function () {\r",
+											"        pm.response.to.have.status(200);\r",
+											"    });\r",
+											"} else\r",
+											"    pm.test(\"Virtual Server 80 Exists\", function () {\r",
+											"        pm.response.to.have.status(409);\r",
+											"    });"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{password}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{user}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \r\n    \"name\": \"app.acme.com_vs_80\",\r\n    \"destination\": \"10.1.10.187:80\",\r\n    \"mask\": \"255.255.255.255\",\r\n    \"profilesReference\": {\"items\": [ {\"context\": \"all\", \"name\": \"acme_http\"}, {\"context\": \"all\", \"name\": \"f5-tcp-progressive\"}] }, \r\n    \"rules\": [\"_sys_https_redirect\"],\r\n    \"sourceAddressTranslation\": {\"type\": \"automap\"}\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://{{big-ip}}/mgmt/tm/ltm/virtual/",
+									"protocol": "https",
+									"host": [
+										"{{big-ip}}"
+									],
+									"path": [
+										"mgmt",
+										"tm",
+										"ltm",
+										"virtual",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Patch",
+					"item": [
+						{
+							"name": "Update - LTM Virtual Server (443)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "e5cdcc4f-22d9-469a-9597-a007da6b1df3",
+										"exec": [
+											"if (responseCode.code === 200) {\r",
+											"    pm.collectionVariables.set('PRIOR_RESPONSE', 'OK');\r",
+											"    pm.test(\"Updated Virtual Server\", function () {\r",
+											"        pm.response.to.have.status(200);\r",
+											"    });\r",
+											"} else\r",
+											"    pm.test(\"Update Failed\", function () {\r",
+											"        pm.response.to.have.status(409);\r",
+											"    });"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{password}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{user}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \r\n    \"name\": \"app.acme.com_vs\",\r\n    \"profilesReference\": {\"items\": [ {\"context\": \"all\", \"name\": \"acme_https\"}, {\"context\": \"all\", \"name\": \"f5-tcp-progressive\"}, {\"context\": \"clientside\", \"name\": \"app.acme.com_client-ssl\"}] }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://{{big-ip}}/mgmt/tm/ltm/virtual/app.acme.com_vs",
+									"protocol": "https",
+									"host": [
+										"{{big-ip}}"
+									],
+									"path": [
+										"mgmt",
+										"tm",
+										"ltm",
+										"virtual",
+										"app.acme.com_vs"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update - LTM HTTP Client SSL",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "da125ece-2fd4-4e37-9a41-af0f81146640",
+										"exec": [
+											"if (responseCode.code === 200) {\r",
+											"    pm.collectionVariables.set('PRIOR_RESPONSE', 'OK');\r",
+											"    pm.test(\"Updated Client SSL Profile\", function () {\r",
+											"        pm.response.to.have.status(200);\r",
+											"    });\r",
+											"} else\r",
+											"    pm.test(\"Failed to udpte Client SSL Profile\", function () {\r",
+											"        pm.response.to.have.status(409);\r",
+											"    });"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{password}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{user}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\":\"app.acme.com_client-ssl\",\n\t\"ciphers\": \"ECDHE:DEFAULT:!DHE:!TLSv1:!TLSv1_1:@STRENGTH\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://{{big-ip}}/mgmt/tm/ltm/profile/client-ssl/app.acme.com_client-ssl",
+									"protocol": "https",
+									"host": [
+										"{{big-ip}}"
+									],
+									"path": [
+										"mgmt",
+										"tm",
+										"ltm",
+										"profile",
+										"client-ssl",
+										"app.acme.com_client-ssl"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Add",
+					"item": [
+						{
+							"name": "Create - LTM Second Node",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "0f9a605e-83a2-451b-af00-7d0c35ab7f6d",
+										"exec": [
+											"if (responseCode.code === 200) {\r",
+											"    pm.collectionVariables.set('PRIOR_RESPONSE', 'OK');\r",
+											"    pm.test(\"Created Node\", function () {\r",
+											"        pm.response.to.have.status(200);\r",
+											"    });\r",
+											"} else\r",
+											"    pm.test(\"Node Exists\", function () {\r",
+											"        pm.response.to.have.status(409);\r",
+											"    });"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{password}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{user}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \r\n    \"name\": \"app.acme.com_node2\",\r\n    \"address\": \"10.1.20.16\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://{{big-ip}}/mgmt/tm/ltm/node/",
+									"protocol": "https",
+									"host": [
+										"{{big-ip}}"
+									],
+									"path": [
+										"mgmt",
+										"tm",
+										"ltm",
+										"node",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add - LTM Pool Member",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "347c32eb-0303-465c-94b3-fbbb412cc14f",
+										"exec": [
+											"if (responseCode.code === 200) {\r",
+											"    pm.collectionVariables.set('PRIOR_RESPONSE', 'OK');\r",
+											"    pm.test(\"Pool Membered Added\", function () {\r",
+											"        pm.response.to.have.status(200);\r",
+											"    });\r",
+											"} else\r",
+											"    pm.test(\"Failed to add Pool Member\", function () {\r",
+											"        pm.response.to.have.status(409);\r",
+											"    });"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{password}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{user}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\":\"/Common/app.acme.com_node2:80\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://{{big-ip}}/mgmt/tm/ltm/pool/app.acme.com_pool/members",
+									"protocol": "https",
+									"host": [
+										"{{big-ip}}"
+									],
+									"path": [
+										"mgmt",
+										"tm",
+										"ltm",
+										"pool",
+										"app.acme.com_pool",
+										"members"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Down",
+					"item": [
+						{
+							"name": "Disabled - LTM Pool Member",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "e499572f-6a2a-40e1-850b-7bbc30a130bd",
+										"exec": [
+											"if (responseCode.code === 200) {\r",
+											"    pm.collectionVariables.set('PRIOR_RESPONSE', 'OK');\r",
+											"    pm.test(\"Created Pool\", function () {\r",
+											"        pm.response.to.have.status(200);\r",
+											"    });\r",
+											"} else\r",
+											"    pm.test(\"Pool Exists\", function () {\r",
+											"        pm.response.to.have.status(409);\r",
+											"    });"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{password}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{user}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"session\":\"user-disabled\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://{{big-ip}}/mgmt/tm/ltm/pool/app.acme.com_pool/members/~Common~app.acme.com_node2:80",
+									"protocol": "https",
+									"host": [
+										"{{big-ip}}"
+									],
+									"path": [
+										"mgmt",
+										"tm",
+										"ltm",
+										"pool",
+										"app.acme.com_pool",
+										"members",
+										"~Common~app.acme.com_node2:80"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Enable - LTM Pool Member",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "dadd1453-2b8a-4631-a76d-f73cb585622b",
+										"exec": [
+											"if (responseCode.code === 200) {\r",
+											"    pm.collectionVariables.set('PRIOR_RESPONSE', 'OK');\r",
+											"    pm.test(\"Created Pool\", function () {\r",
+											"        pm.response.to.have.status(200);\r",
+											"    });\r",
+											"} else\r",
+											"    pm.test(\"Pool Exists\", function () {\r",
+											"        pm.response.to.have.status(409);\r",
+											"    });"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{password}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{user}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"session\":\"user-enabled\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://{{big-ip}}/mgmt/tm/ltm/pool/app.acme.com_pool/members/~Common~app.acme.com_node2:80",
+									"protocol": "https",
+									"host": [
+										"{{big-ip}}"
+									],
+									"path": [
+										"mgmt",
+										"tm",
+										"ltm",
+										"pool",
+										"app.acme.com_pool",
+										"members",
+										"~Common~app.acme.com_node2:80"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Delete",
+					"item": [
+						{
+							"name": "Delete - LTM Virtual Server (80)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "6f9c737f-2bfa-456a-bfdd-43dfbe827b44",
+										"exec": [
+											"if (responseCode.code === 200) {\r",
+											"    pm.collectionVariables.set('PRIOR_RESPONSE', 'OK');\r",
+											"    pm.test(\"Deleted Virtual Server 80\", function () {\r",
+											"        pm.response.to.have.status(200);\r",
+											"    });\r",
+											"} else\r",
+											"    pm.test(\"Failed to Delete\", function () {\r",
+											"        pm.response.to.have.status(409);\r",
+											"    });"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{password}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{user}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://{{big-ip}}/mgmt/tm/ltm/virtual/app.acme.com_vs_80",
+									"protocol": "https",
+									"host": [
+										"{{big-ip}}"
+									],
+									"path": [
+										"mgmt",
+										"tm",
+										"ltm",
+										"virtual",
+										"app.acme.com_vs_80"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete - LTM Virtual Server (443)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "92813574-771f-4bb1-b173-f12cdb548be4",
+										"exec": [
+											"if (responseCode.code === 200) {\r",
+											"    pm.collectionVariables.set('PRIOR_RESPONSE', 'OK');\r",
+											"    pm.test(\"Deleted Virtual Server 443\", function () {\r",
+											"        pm.response.to.have.status(200);\r",
+											"    });\r",
+											"} else\r",
+											"    pm.test(\"Failed to Delete\", function () {\r",
+											"        pm.response.to.have.status(409);\r",
+											"    });"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{password}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{user}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \r\n    \"name\": \"app.acme.com_vs\",\r\n    \"destination\": \"10.1.10.187:443\",\r\n    \"mask\": \"255.255.255.255\",\r\n    \"pool\": \"app.acme.com_pool\",\r\n    \"persist\": [ {\"name\": \"acme_cookie\"} ],\r\n    \"profilesReference\": {\"items\": [ {\"context\": \"all\", \"name\": \"acme_https\"}, {\"context\": \"all\", \"name\": \"tcp\"}, {\"context\": \"clientside\", \"name\": \"app.acme.com_client-ssl\"}] },\r\n    \"sourceAddressTranslation\": {\"type\": \"automap\"}\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://{{big-ip}}/mgmt/tm/ltm/virtual/app.acme.com_vs",
+									"protocol": "https",
+									"host": [
+										"{{big-ip}}"
+									],
+									"path": [
+										"mgmt",
+										"tm",
+										"ltm",
+										"virtual",
+										"app.acme.com_vs"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete - LTM HTTP Client SSL",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "dda66e9f-2ce2-4803-a3b2-0edc0e76fd1c",
+										"exec": [
+											"if (responseCode.code === 200) {\r",
+											"    pm.collectionVariables.set('PRIOR_RESPONSE', 'OK');\r",
+											"    pm.test(\"Deleted Client SSL Profile\", function () {\r",
+											"        pm.response.to.have.status(200);\r",
+											"    });\r",
+											"} else\r",
+											"    pm.test(\"Failed to Delete\", function () {\r",
+											"        pm.response.to.have.status(409);\r",
+											"    });"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{password}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{user}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://{{big-ip}}/mgmt/tm/ltm/profile/client-ssl/app.acme.com_client-ssl",
+									"protocol": "https",
+									"host": [
+										"{{big-ip}}"
+									],
+									"path": [
+										"mgmt",
+										"tm",
+										"ltm",
+										"profile",
+										"client-ssl",
+										"app.acme.com_client-ssl"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete - LTM HTTP Persistence Cookie",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "c409fed9-a615-4701-8afc-221c8cb58e19",
+										"exec": [
+											"if (responseCode.code === 200) {\r",
+											"    pm.collectionVariables.set('PRIOR_RESPONSE', 'OK');\r",
+											"    pm.test(\"Deleted Cookie\", function () {\r",
+											"        pm.response.to.have.status(200);\r",
+											"    });\r",
+											"} else\r",
+											"    pm.test(\"Failed to Delete\", function () {\r",
+											"        pm.response.to.have.status(409);\r",
+											"    });"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{password}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{user}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://{{big-ip}}/mgmt/tm/ltm/persistence/cookie/acme_cookie",
+									"protocol": "https",
+									"host": [
+										"{{big-ip}}"
+									],
+									"path": [
+										"mgmt",
+										"tm",
+										"ltm",
+										"persistence",
+										"cookie",
+										"acme_cookie"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete - LTM HTTP Profile (HTTP)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "dcefebbc-84e8-4802-9fd4-e7ee058e2788",
+										"exec": [
+											"if (responseCode.code === 200) {\r",
+											"    pm.collectionVariables.set('PRIOR_RESPONSE', 'OK');\r",
+											"    pm.test(\"Deleted HTTP Profile (HTTP)\", function () {\r",
+											"        pm.response.to.have.status(200);\r",
+											"    });\r",
+											"} else\r",
+											"    pm.test(\"Failed to Delete\", function () {\r",
+											"        pm.response.to.have.status(409);\r",
+											"    });"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{password}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{user}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://{{big-ip}}/mgmt/tm/ltm/profile/http/acme_http",
+									"protocol": "https",
+									"host": [
+										"{{big-ip}}"
+									],
+									"path": [
+										"mgmt",
+										"tm",
+										"ltm",
+										"profile",
+										"http",
+										"acme_http"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete - LTM HTTP Profile (HTTPS)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "8f5a7027-06a0-4425-ae11-ecaecbbcd0cd",
+										"exec": [
+											"if (responseCode.code === 200) {\r",
+											"    pm.collectionVariables.set('PRIOR_RESPONSE', 'OK');\r",
+											"    pm.test(\"Deleted HTTP Profile (HTTPS)\", function () {\r",
+											"        pm.response.to.have.status(200);\r",
+											"    });\r",
+											"} else\r",
+											"    pm.test(\"Failed to Delete\", function () {\r",
+											"        pm.response.to.have.status(409);\r",
+											"    });"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{password}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{user}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://{{big-ip}}/mgmt/tm/ltm/profile/http/acme_https",
+									"protocol": "https",
+									"host": [
+										"{{big-ip}}"
+									],
+									"path": [
+										"mgmt",
+										"tm",
+										"ltm",
+										"profile",
+										"http",
+										"acme_https"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete - LTM Pool",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "b627605a-68a5-4923-a828-46f624aeabe3",
+										"exec": [
+											"if (responseCode.code === 200) {\r",
+											"    pm.collectionVariables.set('PRIOR_RESPONSE', 'OK');\r",
+											"    pm.test(\"Deleted Pool\", function () {\r",
+											"        pm.response.to.have.status(200);\r",
+											"    });\r",
+											"} else\r",
+											"    pm.test(\"Failed to Delete\", function () {\r",
+											"        pm.response.to.have.status(409);\r",
+											"    });"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{password}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{user}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://{{big-ip}}/mgmt/tm/ltm/pool/app.acme.com_pool",
+									"protocol": "https",
+									"host": [
+										"{{big-ip}}"
+									],
+									"path": [
+										"mgmt",
+										"tm",
+										"ltm",
+										"pool",
+										"app.acme.com_pool"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete - LTM Monitor",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "7d3400ba-fc0c-4345-a1c8-9cf2c1aebb6a",
+										"exec": [
+											"if (responseCode.code === 200) {\r",
+											"    pm.collectionVariables.set('PRIOR_RESPONSE', 'OK');\r",
+											"    pm.test(\"Deleted Monitor\", function () {\r",
+											"        pm.response.to.have.status(200);\r",
+											"    });\r",
+											"} else\r",
+											"    pm.test(\"Failed to Delete\", function () {\r",
+											"        pm.response.to.have.status(409);\r",
+											"    });"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{password}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{user}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://{{big-ip}}/mgmt/tm/ltm/monitor/http/app.acme.com_monitor",
+									"protocol": "https",
+									"host": [
+										"{{big-ip}}"
+									],
+									"path": [
+										"mgmt",
+										"tm",
+										"ltm",
+										"monitor",
+										"http",
+										"app.acme.com_monitor"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete - LTM Node2",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "03a951fb-4bf8-4824-a010-33dc0ff8b6f8",
+										"exec": [
+											"if (responseCode.code === 200) {\r",
+											"    pm.collectionVariables.set('PRIOR_RESPONSE', 'OK');\r",
+											"    pm.test(\"Deleted Node\", function () {\r",
+											"        pm.response.to.have.status(200);\r",
+											"    });\r",
+											"} else\r",
+											"    pm.test(\"Failed to Delete\", function () {\r",
+											"        pm.response.to.have.status(409);\r",
+											"    });"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{password}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{user}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://{{big-ip}}/mgmt/tm/ltm/node/app.acme.com_node2",
+									"protocol": "https",
+									"host": [
+										"{{big-ip}}"
+									],
+									"path": [
+										"mgmt",
+										"tm",
+										"ltm",
+										"node",
+										"app.acme.com_node2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete - LTM Node1",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "55a3de87-4f92-4f3d-a057-0fbe130de9ef",
+										"exec": [
+											"if (responseCode.code === 200) {\r",
+											"    pm.collectionVariables.set('PRIOR_RESPONSE', 'OK');\r",
+											"    pm.test(\"Deleted Node\", function () {\r",
+											"        pm.response.to.have.status(200);\r",
+											"    });\r",
+											"} else\r",
+											"    pm.test(\"Failed to Delete\", function () {\r",
+											"        pm.response.to.have.status(409);\r",
+											"    });"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{password}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{user}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://{{big-ip}}/mgmt/tm/ltm/node/app.acme.com_node1",
+									"protocol": "https",
+									"host": [
+										"{{big-ip}}"
+									],
+									"path": [
+										"mgmt",
+										"tm",
+										"ltm",
+										"node",
+										"app.acme.com_node1"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "AS3",
+			"item": [
+				{
+					"name": "Deploy - app.acme.com",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{user}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n     \"class\": \"AS3\",\r\n     \"action\": \"deploy\",\r\n     \"persist\": true,\r\n     \"declaration\": {\r\n         \"class\": \"ADC\",\r\n         \"schemaVersion\": \"3.0.0\",\r\n         \"id\": \"example-declaration-01\",\r\n         \"label\": \"Sample 1\",\r\n         \"remark\": \"Simple HTTP application with round robin pool\",\r\n         \"Sample_01\": {\r\n             \"class\": \"Tenant\",\r\n             \"defaultRouteDomain\": 0,\r\n             \"Application_1\": {\r\n                 \"class\": \"Application\",\r\n                 \"template\": \"http\",\r\n             \"serviceMain\": {\r\n                 \"class\": \"Service_HTTP\",\r\n                 \"virtualAddresses\": [\r\n                     \"10.0.1.10\"\r\n                 ],\r\n                 \"pool\": \"web_pool\"\r\n                 },\r\n                 \"web_pool\": {\r\n                     \"class\": \"Pool\",\r\n                     \"monitors\": [\r\n                         \"http\"\r\n                     ],\r\n                     \"members\": [\r\n                         {\r\n                             \"servicePort\": 80,\r\n                             \"serverAddresses\": [\r\n                                 \"192.0.1.10\",\r\n                                 \"192.0.1.11\"\r\n                             ]\r\n                         }\r\n                     ]\r\n                 }\r\n             }\r\n         }\r\n     }\r\n }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{big-ip}}/mgmt/shared/appsvcs/declare",
+							"protocol": "https",
+							"host": [
+								"{{big-ip}}"
+							],
+							"path": [
+								"mgmt",
+								"shared",
+								"appsvcs",
+								"declare"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete - app.acme.com",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{user}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{big-ip}}/mgmt/shared/appsvcs/declare/acme",
+							"protocol": "https",
+							"host": [
+								"{{big-ip}}"
+							],
+							"path": [
+								"mgmt",
+								"shared",
+								"appsvcs",
+								"declare",
+								"acme"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"variable": [
+		{
+			"id": "6cfc84a5-7c4c-4b2d-87c7-e9a9c03bcc5a",
+			"key": "PRIOR_RESPONSE",
+			"value": "",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}
